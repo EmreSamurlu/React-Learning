@@ -1,5 +1,5 @@
 //* IMPORT *//
-import PropTypes from "prop-types";
+import PropTypes from "prop-types"; // Proptype tanımlarını yapmamız için bu importu eklememiz gerekiyor.
 
 //******* END *******//
 
@@ -38,6 +38,7 @@ function User({ name, surname, isLoggedIn, age, friends, address }) {
     );
 }
 
+//* bu kısmı tanımlamak önemli !!
 User.propTypes = {
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
