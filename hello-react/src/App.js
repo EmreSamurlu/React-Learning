@@ -1,14 +1,13 @@
+import "./App.css";
 
-import './App.css';
-
-import Header from "./components/Header"
-
+import User from "./components/User"
+//  Boolean veya number gönderirken (line-8) süslü parantezler içinde yazılır. {} //
 function App() {
-  return (
-    <>
-      <Header />
-    </>
-  );
+    return (
+        <>
+            <User name="Emre" surname="Samurlu" isLoggedIn={true} age ={28} /> 
+        </>
+    );
 }
 
 export default App;
