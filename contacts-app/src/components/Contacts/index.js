@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import "./style.css"
 
 import List from "./List";
@@ -9,24 +9,24 @@ function Contacts() {
         {
             fullname: "Özge",
             phone_number: "12346579"
-        },{
-            fullname:"Okan",
+        }, {
+            fullname: "Okan",
             phone_number: "5465432187"
-        },{
-            fullname:"Mehmet",
+        }, {
+            fullname: "Mehmet",
             phone_number: "6579830573"
         }
     ]);
 
-    useEffect(()=> {
-console.log(contacts);
+    useEffect(() => {
+        console.log(contacts);
     }, [contacts])
 
     return (
         <div id="container">
             <h1>Contacts</h1>
-            <List contacts={contacts} />
             <Form addContact={setContacts} contacts={contacts} />
+            <List contacts={contacts} />
         </div>
     )
 }
