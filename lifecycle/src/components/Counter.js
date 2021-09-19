@@ -3,17 +3,26 @@ import { useState, useEffect } from "react";
 
 function Counter() {
     const [number, setNumber] = useState(0);
-    const [name, setName] = useState("Emre")
+    // const [name, setName] = useState("Emre")
 
     useEffect(() => {
         console.log("Component Mount Güncellendi!");
+
+        const interval = setInterval(() => {
+            setNumber((n) => n + 1)
+        }, 1000)
+
+        return () => clearInterval(interval, console.log("Sayaç durduruldu!"))
+        
+
     }, [])
     useEffect(() => {
-        console.log("number güncellendi!");
+        console.log("Sayaç Başlatıldı!!");
+
     }, [number])
-    useEffect(() => {
-        console.log("Name Güncellendi!");
-    }, [name])
+    // useEffect(() => {
+    //     console.log("Name Güncellendi!");
+    // }, [name])
 
     return (
         <div>
@@ -21,8 +30,8 @@ function Counter() {
             <button onClick={() => setNumber(number + 1)} onChange={setNumber}>Click</button>
             <br />
             <hr />
-            <h1>{name}</h1>
-            <button onClick={() => setName("Özge")} onChange={setName}>Click</button>
+            {/* <h1>{name}</h1>
+            <button onClick={() => setName("Özge")} onChange={setName}>Click</button> */}
         </div>
     );
 }
