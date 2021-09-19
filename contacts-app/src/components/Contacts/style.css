@@ -1,0 +1,29 @@
+#container {
+    width: 400px;
+    background-color: aquamarine;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+input {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+ul,li {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.list {
+    margin: 1rem 0;
+}
+
+.list > li {
+    background-color:beige ;
+    padding: 0.2rem;
+    margin-bottom: 0.1rem;
+}
