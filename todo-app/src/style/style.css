@@ -1,0 +1,38 @@
+.App {
+    max-width: 50%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color:blanchedalmond;
+    min-width: 400px;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.btn-box {
+    margin-right:15px ;
+    
+
+}
+
+input.add-input{
+    margin: 5px;
+    width: 75%;
+}
+
+input.edit-text{
+    height: 24px;
+    width: 55%;
+    margin-top: 10px;
+}
+.todo-item{
+    margin-top: 10px;
+}
+
+.completed{
+    text-decoration: line-through;
+    opacity: 0.4;
+}
