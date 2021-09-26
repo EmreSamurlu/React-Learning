@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import "./App.css"
+import "./style/style.css"
 
 const App = () => {
   //hooks
