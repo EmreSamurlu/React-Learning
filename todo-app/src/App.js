@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
-import clsx from 'clsx';
+
 
 import Checkbox from '@mui/material/Checkbox';
 import IconButton from '@mui/material/IconButton';
@@ -11,15 +11,28 @@ import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOu
 
 import "./App.css"
 import "./style/style.css"
+// import { FormatColorReset } from '@mui/icons-material';
 // import { style } from '@mui/system';
 
 
 
 const App = () => {
+
+  //use local storage data
+  const getTodos = () => {
+    const temp = localStorage.getItem("todos")
+    if (temp){
+      return JSON.parse(temp);
+    } 
+    return [];
+//try catch ile error fırlatılabilir. 
+  }
+
   //hooks
 
   // saving our todos
   const [todos, setTodos] = useState([]);
+  
 
   // set todos here or adding todos here 
   const [todo, setTodo] = useState("");
@@ -28,17 +41,12 @@ const App = () => {
   const [todoEditing, setTodoEditing] = useState(null)
   const [editingText, setEditingText] = useState("")
 
+
   // filter hook
+  const [filterType, setFilterType] = useState(null)
 
-
-  //use local storage data
   useEffect(() => {
-    const temp = localStorage.getItem("todos")
-    const loadedTodos = JSON.parse(temp)
-
-    if (loadedTodos) {
-      setTodos(loadedTodos)
-    }
+    setTodos(getTodos())
   }, [])
 
 
@@ -97,10 +105,6 @@ const App = () => {
     //reseting edits
   }
 
-  // filter function
-  
-
-
   return (
     <div className="App">
       <h2>Yapılacaklar Listesi</h2>
@@ -117,16 +121,13 @@ const App = () => {
         </IconButton>
       </form>
 
-      {todos.map((todo) => <div
+      {todos && todos.filter((t) => t.completed === filterType || !filterType).map((todo) =><div className="todo-item"
         onClick={() => toggleComplete(todo.id)}
         key={todo.id}>
 
         {/* if we have a todo item we can edit this item, else we can enter an item */}
         {/* we used clsx styling */}
-        <div className={clsx({
-          'completed': todo.completed,
-          'list-item': true,
-        })}>
+        
 
           <Checkbox onChange={() => toggleComplete(todo.id)} checked={todo.completed}
           />
@@ -135,6 +136,7 @@ const App = () => {
             type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}
           />)
             : (<div className="todo-item">{todo.text}</div>)}
+
 
 
           <div className="btn-box">
@@ -152,11 +154,16 @@ const App = () => {
           </div>
         </div>
 
-      </div>)
-      }
-
-
       
+      )}
+      
+      <div>
+        <button onClick={()=> setFilterType(null)}>Tümünü Göster</button>
+        <button onClick={()=> setFilterType(true)}>Tamamlanan</button>
+        <button onClick={()=> setFilterType(false)}>Devam Eden</button>
+      </div>
+
+
     </div>
   )
 }
