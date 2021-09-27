@@ -13,19 +13,23 @@ import "./App.css"
 import "./style/style.css"
 // import { style } from '@mui/system';
 
+
+
 const App = () => {
   //hooks
 
   // saving our todos
   const [todos, setTodos] = useState([]);
+
   // set todos here or adding todos here 
   const [todo, setTodo] = useState("");
+
   // edit todo hook
   const [todoEditing, setTodoEditing] = useState(null)
   const [editingText, setEditingText] = useState("")
 
   // filter hook
- 
+
 
   //use local storage data
   useEffect(() => {
@@ -59,6 +63,7 @@ const App = () => {
     setTodo("") // after enter a todo, this cleans the input area.
   }
 
+
   // delete function
   function deleteTodo(id) {
     const updatedTodos = [...todos].filter((todo) => todo.id !== id)
@@ -83,7 +88,7 @@ const App = () => {
       if (todo.id === id) {
         todo.text = editingText
       }
-      
+
       return todo;
     })
     setTodos(updatedTodos)
@@ -92,7 +97,9 @@ const App = () => {
     //reseting edits
   }
 
-  // filter todos
+  // filter function
+  
+
 
   return (
     <div className="App">
@@ -110,7 +117,9 @@ const App = () => {
         </IconButton>
       </form>
 
-      {todos.map((todo) => <div key={todo.id}>
+      {todos.map((todo) => <div
+        onClick={() => toggleComplete(todo.id)}
+        key={todo.id}>
 
         {/* if we have a todo item we can edit this item, else we can enter an item */}
         {/* we used clsx styling */}
@@ -122,7 +131,7 @@ const App = () => {
           <Checkbox onChange={() => toggleComplete(todo.id)} checked={todo.completed}
           />
 
-          {todoEditing === todo.id ? (<input className="edit-text" 
+          {todoEditing === todo.id ? (<input className="edit-text"
             type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}
           />)
             : (<div className="todo-item">{todo.text}</div>)}
@@ -142,9 +151,12 @@ const App = () => {
 
           </div>
         </div>
-      
-      </div>)}
 
+      </div>)
+      }
+
+
+      
     </div>
   )
 }
