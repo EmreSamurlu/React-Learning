@@ -120,11 +120,9 @@ const App = () => {
         </IconButton>
       </form>
 
-      {todos.map((todo) => <div className="todo-item"
-        onClick={() => toggleComplete(todo.id)}
-        key={todo.id}>
+      {todos.map((todo) => <div className="todo-item">
 
-        <Checkbox onChange={() => toggleComplete(todo.id)} checked={todo.completed}
+        <Checkbox onClick={() => toggleComplete(todo.id)} checked={todo.completed}
         />
 
         {todoEditing === todo.id ? (<input className="edit-text"
