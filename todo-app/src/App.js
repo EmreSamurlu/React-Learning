@@ -9,6 +9,7 @@ import ModeEditOutlineOutlinedIcon from '@mui/icons-material/ModeEditOutlineOutl
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
 
+
 import "./App.css"
 import "./style/style.css"
 // import { FormatColorReset } from '@mui/icons-material';
@@ -21,18 +22,18 @@ const App = () => {
   //use local storage data
   const getTodos = () => {
     const temp = localStorage.getItem("todos")
-    if (temp){
+    if (temp) {
       return JSON.parse(temp);
-    } 
+    }
     return [];
-//try catch ile error fırlatılabilir. 
+    //try catch ile error fırlatılabilir. 
   }
 
   //hooks
 
   // saving our todos
   const [todos, setTodos] = useState([]);
-  
+
 
   // set todos here or adding todos here 
   const [todo, setTodo] = useState("");
@@ -42,8 +43,7 @@ const App = () => {
   const [editingText, setEditingText] = useState("")
 
 
-  // filter hook
-  const [filterType, setFilterType] = useState(null)
+
 
   useEffect(() => {
     setTodos(getTodos())
@@ -85,9 +85,8 @@ const App = () => {
       if (todo.id === id) {
         todo.completed = !todo.completed
       }
-      return todo
+      return todo;
     })
-
     setTodos(updatedTodos)
   }
 
@@ -121,47 +120,35 @@ const App = () => {
         </IconButton>
       </form>
 
-      {todos && todos.filter((t) => t.completed === filterType || !filterType).map((todo) =><div className="todo-item"
+      {todos.map((todo) => <div className="todo-item"
         onClick={() => toggleComplete(todo.id)}
         key={todo.id}>
 
-        {/* if we have a todo item we can edit this item, else we can enter an item */}
-        {/* we used clsx styling */}
-        
+        <Checkbox onChange={() => toggleComplete(todo.id)} checked={todo.completed}
+        />
 
-          <Checkbox onChange={() => toggleComplete(todo.id)} checked={todo.completed}
-          />
+        {todoEditing === todo.id ? (<input className="edit-text"
+          type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}
+        />)
+          : (<div className="todo-item">{todo.text}</div>)}
 
-          {todoEditing === todo.id ? (<input className="edit-text"
-            type="text" onChange={(e) => setEditingText(e.target.value)} value={editingText}
-          />)
-            : (<div className="todo-item">{todo.text}</div>)}
+        <div className="btn-box">
 
+          <IconButton aria-label="delete" onClick={() => deleteTodo(todo.id)}>
+            <DeleteIcon />
+          </IconButton>
 
+          {todoEditing === todo.id ? (<IconButton aria-label="edit" onClick={() => editTodo(todo.id)}>
+            <SendOutlinedIcon />
+          </IconButton>) : (<IconButton aria-label="edit" onClick={() => setTodoEditing(todo.id)}>
+            <ModeEditOutlineOutlinedIcon />
+          </IconButton>)}
 
-          <div className="btn-box">
-
-            <IconButton aria-label="delete" onClick={() => deleteTodo(todo.id)}>
-              <DeleteIcon />
-            </IconButton>
-
-            {todoEditing === todo.id ? (<IconButton aria-label="edit" onClick={() => editTodo(todo.id)}>
-              <SendOutlinedIcon />
-            </IconButton>) : (<IconButton aria-label="edit" onClick={() => setTodoEditing(todo.id)}>
-              <ModeEditOutlineOutlinedIcon />
-            </IconButton>)}
-
-          </div>
         </div>
+      </div>
+      )}
 
       
-      )}
-      
-      <div>
-        <button onClick={()=> setFilterType(null)}>Tümünü Göster</button>
-        <button onClick={()=> setFilterType(true)}>Tamamlanan</button>
-        <button onClick={()=> setFilterType(false)}>Devam Eden</button>
-      </div>
 
 
     </div>
